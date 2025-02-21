@@ -74,13 +74,13 @@ const EmployeeTable = () => {
             </table>
 
             <div className="pagination">
-                <button onClick={prevPage} disabled={currentPage === 1}>
+                <button onClick={prevPage} disabled={currentPage <= 1}>
                     Previous
                 </button>
-                <span> Page {currentPage} of {totalPages} </span>
-                <button onClick={nextPage} disabled={currentPage === totalPages}>
+                <button onClick={nextPage} disabled={currentPage >= totalPages}>
                     Next
                 </button>
+
             </div>
         </div>
     );
