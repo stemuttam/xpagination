@@ -37,15 +37,15 @@ const EmployeeTable = () => {
 
     // Handle Next page
     const nextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
+    if (currentPage < totalPages) {
+        setCurrentPage((prev) => prev + 1);
+    }
+};
 
     // Handle Previous page
     const prevPage = () => {
     if (currentPage > 1) {
-        setCurrentPage((prev) => prev - 1); // ✅ Ensure it properly updates the state
+        setCurrentPage((prev) => prev - 1);
     }
 };
 
