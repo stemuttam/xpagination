@@ -4,26 +4,31 @@ import "./EmployeeTable.css"; // Importing CSS for styling
 const EmployeeTable = () => {
   const [employees, setEmployees] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const employeesPerPage = 10; // 10 employees per page
+  const employeesPerPage = 10;
 
   useEffect(() => {
-    fetch(
-      "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
-    )
-      .then((response) => response.json())
-      .then((data) => setEmployees(data))
-      .catch((error) => console.error("Error fetching employee data:", error));
+    const fetchEmployees = async () => {
+      try {
+        const response = await fetch(
+          "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
+        );
+        if (!response.ok) throw new Error("Failed to fetch data");
+        const data = await response.json();
+        setEmployees(data);
+      } catch (error) {
+        alert("Error fetching employee data. Please try again later.");
+        console.error(error);
+      }
+    };
+    fetchEmployees();
   }, []);
-
+ 
   // Calculate indexes for pagination
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = employees.slice(
-    indexOfFirstEmployee,
-    indexOfLastEmployee
-  );
+  const currentEmployees = employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
 
-  // Calculate total pages
+  // Total pages calculation
   const totalPages = Math.ceil(employees.length / employeesPerPage);
 
   // Handle Next and Previous
