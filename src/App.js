@@ -2,11 +2,12 @@ import React from "react";
 import EmployeeTable from "./EmployeeTable";
 
 function App() {
-    return (
-        <div className="App">
-            <EmployeeTable />
-        </div>
-    );
+  return (
+    <div>
+      <h1>Employee Management System</h1>
+      <EmployeeTable />
+    </div>
+  );
 }
 
 export default App;
