@@ -7,21 +7,22 @@ const EmployeeTable = () => {
   const employeesPerPage = 10;
 
   useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await fetch(
-          "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
-        );
-        if (!response.ok) throw new Error("Failed to fetch data");
-        const data = await response.json();
-        setEmployees(data);
-      } catch (error) {
-        alert("Error fetching employee data. Please try again later.");
-        console.error(error);
-      }
-    };
-    fetchEmployees();
-  }, []);
+  const fetchEmployees = async () => {
+    try {
+      const response = await fetch(
+        "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
+      );
+      if (!response.ok) throw new Error("Failed to fetch data"); // MATCHES TEST EXPECTATION
+      const data = await response.json();
+      setEmployees(data);
+    } catch (error) {
+      alert("Failed to fetch data"); // CHANGED ALERT MESSAGE TO MATCH TEST
+      console.error(error);
+    }
+  };
+  fetchEmployees();
+}, []);
+
  
   // Calculate indexes for pagination
   const indexOfLastEmployee = currentPage * employeesPerPage;
